@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070846844014",
+    "project_id": "fitnessanddiet-5815a",
+    "storage_bucket": "fitnessanddiet-5815a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070846844014:android:43e2fc071d757577c01a7f",
+        "android_client_info": {
+          "package_name": "com.example.workoutapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVuTZOfItuBUERVmUahvfHsHWtwTehCzk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
