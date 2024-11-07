@@ -1,12 +1,13 @@
 package com.example.workoutapp.repository;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.workoutapp.view.SignInActivity;
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.workoutapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -19,9 +20,12 @@ public class UserRepository {
     private FirebaseUser currentUser;
     private Context context;
 
+    private MutableLiveData<User> userMutableLiveData;
+
     public UserRepository(Context context) {
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.context = context;
+        this.userMutableLiveData = new MutableLiveData<>();
     }
 
     public void signUpUserWithEmailAndPassword(String email, String password) {
@@ -30,10 +34,6 @@ public class UserRepository {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(context, "Account is created successfully!", Toast.LENGTH_SHORT).show();
-
-                            Intent i = new Intent(context, SignInActivity.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            context.startActivity(i);
                         }
                     })
                     .addOnFailureListener(e -> {
@@ -56,6 +56,23 @@ public class UserRepository {
                         Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
                     });
         }
+    }
+
+    public MutableLiveData<User> getUserMutableLiveData() {
+        currentUser = firebaseAuth.getCurrentUser();
+        if(currentUser != null) {
+            User user = new User(
+                    currentUser.getEmail(),
+                    currentUser.getDisplayName() != null ? currentUser.getDisplayName() : "Anonymous"
+            );
+
+            userMutableLiveData.postValue(user);
+        }
+        return userMutableLiveData;
+    }
+
+    public FirebaseUser getCurrentUser() {
+        return firebaseAuth.getCurrentUser();
     }
 
     public void signOut() {
