@@ -64,19 +64,6 @@ public class DashboardActivity extends AppCompatActivity {
         exerciseRecyclerView = binding.exerciseRecyclerView;
         exerciseRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        // Exercise Example
-//        Exercise ex1 = new Exercise("Daily workout", "30 min", "2 Exs", "180 Kcal", "null");
-//        Exercise ex2 = new Exercise("Daily workout 2", "50 min", "5 Exs", "210 Kcal", "null");
-//        Exercise ex3 = new Exercise("Daily workout 3", "40 min", "1 Exs", "190 Kcal", "null");
-//
-//        exerciseList = new ArrayList<>();
-//        exerciseList.add(ex1);
-//        exerciseList.add(ex2);
-//        exerciseList.add(ex3);
-//
-//        exerciseAdapter = new ExerciseAdapter(this, exerciseList);
-//        exerciseRecyclerView.setAdapter(exerciseAdapter);
-
         exerciseViewModel.getExerciseLiveData().observe(this, new Observer<List<Exercise>>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override

@@ -1,22 +1,37 @@
 package com.example.workoutapp.model;
 
-public class Exercise {
-    private String title;
-    private String duration;
-    private String numberOfExercise;
-    private String caloriesBurn;
+import java.io.Serializable;
+import java.util.List;
 
+public class Exercise {
+    private String documentId;
+    private String title;
+    private String totalDuration;
+    private String totalCalories;
     private String imageUrl;
+
+    private String description;
+    private List<Lesson> lessonList;
 
     public Exercise() {
     }
 
-    public Exercise(String title, String duration, String numberOfExercise, String caloriesBurn, String imageUrl) {
+    public Exercise(String documentId, String title, String totalDuration, String totalCalories, String imageUrl, String description, List<Lesson> lessonList) {
+        this.documentId = documentId;
         this.title = title;
-        this.duration = duration;
-        this.numberOfExercise = numberOfExercise;
-        this.caloriesBurn = caloriesBurn;
+        this.totalDuration = totalDuration;
+        this.totalCalories = totalCalories;
         this.imageUrl = imageUrl;
+        this.description = description;
+        this.lessonList = lessonList;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public String getTitle() {
@@ -27,28 +42,20 @@ public class Exercise {
         this.title = title;
     }
 
-    public String getDuration() {
-        return duration;
+    public String getTotalDuration() {
+        return totalDuration;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setTotalDuration(String totalDuration) {
+        this.totalDuration = totalDuration;
     }
 
-    public String getNumberOfExercise() {
-        return numberOfExercise;
+    public String getTotalCalories() {
+        return totalCalories;
     }
 
-    public void setNumberOfExercise(String numberOfExercise) {
-        this.numberOfExercise = numberOfExercise;
-    }
-
-    public String getCaloriesBurn() {
-        return caloriesBurn;
-    }
-
-    public void setCaloriesBurn(String caloriesBurn) {
-        this.caloriesBurn = caloriesBurn;
+    public void setTotalCalories(String totalCalories) {
+        this.totalCalories = totalCalories;
     }
 
     public String getImageUrl() {
@@ -57,5 +64,25 @@ public class Exercise {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Lesson> getLessonList() {
+        return lessonList;
+    }
+
+    public void setLessonList(List<Lesson> lessonList) {
+        this.lessonList = lessonList;
+    }
+
+    public String getLessonCount(){
+        return String.valueOf(lessonList.size());
     }
 }
