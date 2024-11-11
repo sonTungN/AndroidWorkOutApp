@@ -28,11 +28,30 @@
             tools:ignore="HardcodedText" />
         
         <EditText
+            android:id="@+id/signup_displayName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext"
+            android:drawableStart="@drawable/id_card_icon"
+            android:drawablePadding="8dp"
+            android:hint="Name"
+            android:padding="8dp"
+            android:textColorHint="@color/editTextContent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:ignore="HardcodedText" />
+        
+        <EditText
             android:id="@+id/signup_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext"
             android:drawableStart="@drawable/person_icon"
@@ -43,7 +62,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/signup_displayName"
             tools:ignore="HardcodedText" />
         
         <EditText
@@ -51,8 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext"
             android:drawableStart="@drawable/lock_icon"
             android:drawablePadding="8dp"
@@ -61,6 +80,7 @@
             android:padding="8dp"
             android:textColorHint="@color/editTextContent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signup_email"
             tools:ignore="HardcodedText" />

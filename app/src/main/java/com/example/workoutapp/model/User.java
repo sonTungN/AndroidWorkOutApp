@@ -3,14 +3,14 @@ package com.example.workoutapp.model;
 public class User {
     private String email;
 
-    private String username;
+    private String displayName;
 
     public User() {
     }
 
-    public User(String email, String username) {
+    public User(String email, String displayName) {
         this.email = email;
-        this.username = username;
+        this.displayName = displayName;
     }
 
     public String getEmail() {
@@ -21,11 +21,11 @@ public class User {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }

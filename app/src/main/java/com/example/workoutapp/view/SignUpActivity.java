@@ -32,8 +32,9 @@ public class SignUpActivity extends AppCompatActivity {
         binding.signupBtn.setOnClickListener(view -> {
             String email = binding.signupEmail.getText().toString();
             String password = binding.signupPassword.getText().toString();
+            String displayName = binding.signupDisplayName.getText().toString();
 
-            userViewModel.signUpUser(email, password);
+            userViewModel.signUpUser(email, password, displayName);
 
             Intent i = new Intent(this, SignInActivity.class);
             startActivity(i);
