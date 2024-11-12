@@ -24,6 +24,14 @@ public class ExerciseViewModel extends AndroidViewModel {
         return repository.getExerciseMutableLiveData();
     }
 
+    public MutableLiveData<List<Exercise>> getDoneExerciseLiveData(String userId) {
+        return repository.getDoneExerciseMutableLiveData(userId);
+    }
+
+    public void markedExerciseAsDone(String docId, Runnable fetchData) {
+        repository.markedWorkoutStatusAsDone(docId, fetchData);
+    }
+
     public MutableLiveData<List<Lesson>> getLessonListLiveData(String docId) {
         return repository.getLessonListMutableLiveData(docId);
     }

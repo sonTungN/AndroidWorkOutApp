@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class UserViewModel extends AndroidViewModel {
 
-    private UserRepository repository;
+    private final UserRepository repository;
 
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -35,8 +35,8 @@ public class UserViewModel extends AndroidViewModel {
         return repository.getUserMutableLiveData();
     }
 
-    public FirebaseUser getCurrentUser() {
-        return repository.getCurrentUser();
+    public String getCurrentUserId() {
+        return repository.getCurrentUserId();
     }
 
     public void signOut(){

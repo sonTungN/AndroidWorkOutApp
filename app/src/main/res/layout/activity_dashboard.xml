@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="100dp">
             
             <LinearLayout
                 android:layout_width="match_parent"
@@ -180,10 +181,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Main Workout"
                     android:layout_marginTop="20dp"
-                    android:textSize="18sp"
+                    android:text="Popular Workout"
                     android:textColor="@color/white"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
                 
@@ -192,6 +193,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:orientation="horizontal" />
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Completed Workout"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/doneRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal" />
             
             </LinearLayout>

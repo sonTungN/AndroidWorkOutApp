@@ -1,7 +1,7 @@
 package com.example.workoutapp.model;
 
-import java.io.Serializable;
 import java.util.List;
+
 
 public class Exercise {
     private String documentId;
@@ -12,11 +12,20 @@ public class Exercise {
 
     private String description;
     private List<Lesson> lessonList;
+//    private Boolean isDone;
 
     public Exercise() {
     }
 
-    public Exercise(String documentId, String title, String totalDuration, String totalCalories, String imageUrl, String description, List<Lesson> lessonList) {
+    public Exercise(
+            String documentId,
+            String title,
+            String totalDuration,
+            String totalCalories,
+            String imageUrl,
+            String description,
+            List<Lesson> lessonList
+    ) {
         this.documentId = documentId;
         this.title = title;
         this.totalDuration = totalDuration;
@@ -25,6 +34,26 @@ public class Exercise {
         this.description = description;
         this.lessonList = lessonList;
     }
+
+//    public Exercise (
+//            String documentId,
+//            String title,
+//            String totalDuration,
+//            String totalCalories,
+//            String imageUrl,
+//            String description,
+//            List<Lesson> lessonList,
+//            Boolean isDone
+//    ) {
+//        this.documentId = documentId;
+//        this.title = title;
+//        this.totalDuration = totalDuration;
+//        this.totalCalories = totalCalories;
+//        this.imageUrl = imageUrl;
+//        this.description = description;
+//        this.lessonList = lessonList;
+//        this.isDone = isDone;
+//    }
 
     public String getDocumentId() {
         return documentId;
@@ -81,6 +110,14 @@ public class Exercise {
     public void setLessonList(List<Lesson> lessonList) {
         this.lessonList = lessonList;
     }
+
+//    public Boolean isDone() {
+//        return isDone;
+//    }
+//
+//    public void setDone(Boolean done) {
+//        isDone = done;
+//    }
 
     public String getLessonCount(){
         return String.valueOf(lessonList.size());

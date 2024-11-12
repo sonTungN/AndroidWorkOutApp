@@ -39,9 +39,14 @@ public class DashboardActivity extends AppCompatActivity {
 
     // Exercise
     private ExerciseViewModel exerciseViewModel;
-    private RecyclerView exerciseRecyclerView;
+
     private ExerciseAdapter exerciseAdapter;
+    private RecyclerView exerciseRecyclerView;
     private List<Exercise> exerciseList;
+
+    private ExerciseAdapter doneExerciseAdapter;
+    private RecyclerView doneExerciseRecyclerView;
+    private List<Exercise> doneExerciseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +57,23 @@ public class DashboardActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
         setUpBottomNavigationBar();
 
-        // User
+        // View Model
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        exerciseViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
 
+        // User
         userViewModel.getUserMutableLiveData().observe(this, user -> binding.setUser(user));
 
-        // Exercise
-        exerciseViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
+        // All Exercise
         exerciseList = new ArrayList<>();
-
         exerciseRecyclerView = binding.exerciseRecyclerView;
-        exerciseRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        exerciseRecyclerView.setLayoutManager(
+                new LinearLayoutManager(
+                        this,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                )
+        );
 
         exerciseViewModel.getExerciseLiveData().observe(this, new Observer<List<Exercise>>() {
             @SuppressLint("NotifyDataSetChanged")
@@ -77,6 +88,9 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+//        // Done Exercise
+//        fetchDoneExercise();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -84,22 +98,44 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    public void setUpBottomNavigationBar() {
-//        binding.navBar.setSelectedItemId(R.id.home);
-        binding.navBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        fetchDoneExercise();
+//    }
+
+    public void fetchDoneExercise() {
+        doneExerciseList = new ArrayList<>();
+        doneExerciseRecyclerView = binding.doneRecyclerView;
+        doneExerciseRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        exerciseViewModel.getDoneExerciseLiveData(userViewModel.getCurrentUserId()).observe(this, new Observer<List<Exercise>>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
-                    navigateToActivity(DashboardActivity.class);
-                    return true;
+            public void onChanged(List<Exercise> exercises) {
+                doneExerciseList.clear();
+                doneExerciseList.addAll(exercises);
 
-                } else if (item.getItemId() == R.id.profile) {
-                   navigateToActivity(ProfileActivity.class);
-                   return true;
-                }
-
-                return false;
+                doneExerciseAdapter = new ExerciseAdapter(getApplicationContext(), doneExerciseList);
+                doneExerciseRecyclerView.setAdapter(doneExerciseAdapter);
+                doneExerciseAdapter.notifyDataSetChanged();
             }
+        });
+    }
+
+    public void setUpBottomNavigationBar() {
+        binding.navBar.setSelectedItemId(R.id.home);
+        binding.navBar.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.home) {
+                navigateToActivity(DashboardActivity.class);
+                return true;
+
+            } else if (item.getItemId() == R.id.profile) {
+               navigateToActivity(ProfileActivity.class);
+               return true;
+            }
+
+            return false;
         });
     }
 

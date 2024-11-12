@@ -3,7 +3,6 @@ package com.example.workoutapp.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -74,7 +73,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("DOC_ID", exerciseList.get(position).getDocumentId());
                 context.startActivity(i);
-
             });
         }
 

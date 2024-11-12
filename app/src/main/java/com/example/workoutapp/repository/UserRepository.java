@@ -5,38 +5,49 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.workoutapp.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class UserRepository {
-
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private FirebaseUser currentUser;
+    public static final String USER_COLLECTION_PATH = "Users";
     private Context context;
 
+    // Firebase Auth
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser currentUser;
+
+    // Firebase FireStore
+    private FirebaseFirestore db;
+
+    // Live Data List
     private MutableLiveData<User> userMutableLiveData;
 
     public UserRepository(Context context) {
         this.context = context;
         this.firebaseAuth = FirebaseAuth.getInstance();
+
+        this.db = FirebaseFirestore.getInstance();
+
         this.userMutableLiveData = new MutableLiveData<>();
     }
 
     public void signUpUserWithEmailAndPassword(String email, String password, String displayName) {
-        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(displayName)) {
+        if(
+            !TextUtils.isEmpty(email) &&
+            !TextUtils.isEmpty(password) &&
+            !TextUtils.isEmpty(displayName)
+        ) {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
-
                         currentUser = firebaseAuth.getCurrentUser();
 
                         UserProfileChangeRequest customizedProfile =
@@ -47,24 +58,31 @@ public class UserRepository {
                         currentUser.updateProfile(customizedProfile)
                                 .addOnCompleteListener(profileTask -> {
                                     if (profileTask.isCanceled()) {
-                                        Toast.makeText(context, "Register with display name failed!", Toast.LENGTH_SHORT).show();
                                         Log.d("REGISTER", "Register with display name failed!");
                                     }
                                 });
 
                         if (task.isSuccessful()) {
                             Toast.makeText(context, "Register Status: SUCCESS!", Toast.LENGTH_SHORT).show();
+
+                            User userObject = new User(email, displayName, new ArrayList<>());
+                            db.collection(USER_COLLECTION_PATH)
+                                    .document(currentUser.getUid())
+                                    .set(userObject);
                         }
                     })
                     .addOnFailureListener(e -> {
-                        Log.d("REGISTER ACC FAILED", Objects.requireNonNull(e.getMessage()));
+                        Log.d("REGISTER", Objects.requireNonNull(e.getMessage()));
                         Toast.makeText(context, "Register Status: FAILED!", Toast.LENGTH_SHORT).show();
                     });
         }
     }
 
     public void signInUserWithEmailAndPassword(String email, String password) {
-        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
+        if(
+            !TextUtils.isEmpty(email) &&
+            !TextUtils.isEmpty(password)
+        ) {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -109,8 +127,8 @@ public class UserRepository {
         return userMutableLiveData;
     }
 
-    public FirebaseUser getCurrentUser() {
-        return firebaseAuth.getCurrentUser();
+    public String getCurrentUserId() {
+        return Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
     }
 
     public void signOut() {
