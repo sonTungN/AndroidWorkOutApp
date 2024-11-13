@@ -119,8 +119,6 @@ public class LessonActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void fetchExerciseDataIntoView(String documentId) {
         DocumentReference documentReference =
                 FirebaseFirestore.getInstance()

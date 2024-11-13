@@ -2,6 +2,7 @@ package com.example.workoutapp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.workoutapp.R;
 import com.example.workoutapp.databinding.ActivitySignInBinding;
 import com.example.workoutapp.viewmodel.UserViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -35,9 +37,6 @@ public class SignInActivity extends AppCompatActivity {
             String password = binding.signinPassword.getText().toString();
 
             userViewModel.signInUser(email, password);
-
-            Intent i = new Intent(this, DashboardActivity.class);
-            startActivity(i);
         });
 
         binding.signupCta.setOnClickListener(view -> {

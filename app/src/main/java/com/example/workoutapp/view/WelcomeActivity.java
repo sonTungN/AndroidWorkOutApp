@@ -10,8 +10,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.workoutapp.R;
+import com.example.workoutapp.viewmodel.UserViewModel;
 
 public class WelcomeActivity extends AppCompatActivity {
 

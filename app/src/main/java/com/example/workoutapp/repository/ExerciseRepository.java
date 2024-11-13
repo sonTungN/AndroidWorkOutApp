@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.workoutapp.R;
 import com.example.workoutapp.model.Exercise;
 import com.example.workoutapp.model.Lesson;
 import com.example.workoutapp.model.User;
@@ -90,10 +91,42 @@ public class ExerciseRepository {
                 .document(userId)
                 .get()
                     .addOnSuccessListener(documentSnapshot -> {
-                        User user = documentSnapshot.toObject(User.class);
+                        List<Map<String, Object>> exerciseList =
+                                (List<Map<String, Object>>) documentSnapshot.get("doneExercises");
 
-                        assert user != null;
-                        doneExerciseMutableLiveData.postValue(user.getDoneExercise());
+                        List<Exercise> doneExerciseList = new ArrayList<>();
+
+                        assert exerciseList != null;
+                        for(Map<String, Object> ex : exerciseList) {
+                            Exercise exercise = new Exercise();
+                            exercise.setDocumentId((String) ex.get("documentId"));
+                            exercise.setTitle((String) ex.get("title"));
+                            exercise.setTotalDuration((String) ex.get("totalDuration"));
+                            exercise.setTotalCalories((String) ex.get("totalCalories"));
+                            exercise.setImageUrl((String) ex.get("imageUrl"));
+                            exercise.setDescription((String) ex.get("description"));
+
+                            List<Map<String, Object>> lessonMaps =
+                                (List<Map<String, Object>>) ex.get("lessonList");
+
+                            List<Lesson> lessons = new ArrayList<>();
+
+                            assert lessonMaps != null;
+                            for (Map<String, Object> lessonMap : lessonMaps) {
+                                Lesson lesson = new Lesson();
+                                lesson.setTitle((String) lessonMap.get("title"));
+                                lesson.setDuration((String) lessonMap.get("duration"));
+                                lesson.setImageUrl((String) lessonMap.get("imageUrl"));
+                                lesson.setLink((String) lessonMap.get("link"));
+
+                                lessons.add(lesson);
+                            }
+
+                            exercise.setLessonList(lessons);
+                            doneExerciseList.add(exercise);
+                        }
+
+                        doneExerciseMutableLiveData.postValue(doneExerciseList);
                     });
 
         return doneExerciseMutableLiveData;

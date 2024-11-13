@@ -43,11 +43,11 @@ public class User {
         this.displayName = displayName;
     }
 
-    public List<Exercise> getDoneExercise() {
+    public List<Exercise> getDoneExercises() {
         return doneExercises;
     }
 
-    public void setDoneExercise(List<Exercise> doneExercises) {
+    public void setDoneExercises(List<Exercise> doneExercises) {
         this.doneExercises = doneExercises;
     }
 }

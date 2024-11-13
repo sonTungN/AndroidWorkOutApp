@@ -39,6 +39,10 @@ public class UserViewModel extends AndroidViewModel {
         return repository.getCurrentUserId();
     }
 
+    public boolean isUserLoggedIn() {
+        return repository.isUserLoggedIn();
+    }
+
     public void signOut(){
         repository.signOut();
     }

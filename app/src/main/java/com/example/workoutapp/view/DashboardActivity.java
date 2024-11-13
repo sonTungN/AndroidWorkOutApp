@@ -64,6 +64,13 @@ public class DashboardActivity extends AppCompatActivity {
         // User
         userViewModel.getUserMutableLiveData().observe(this, user -> binding.setUser(user));
 
+        if (!userViewModel.isUserLoggedIn()) {
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         // All Exercise
         exerciseList = new ArrayList<>();
         exerciseRecyclerView = binding.exerciseRecyclerView;
@@ -89,7 +96,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
 //        // Done Exercise
-//        fetchDoneExercise();
+        fetchDoneExercise();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -98,10 +105,17 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchDoneExercise();
+    }
+
 //    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        fetchDoneExercise();
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        userViewModel.getUserMutableLiveData().removeObserver();
+//        exerciseViewModel.getDoneExerciseLiveData().removeObserver();
 //    }
 
     public void fetchDoneExercise() {

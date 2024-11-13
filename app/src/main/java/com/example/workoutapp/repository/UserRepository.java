@@ -1,6 +1,7 @@
 package com.example.workoutapp.repository;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.workoutapp.model.User;
+import com.example.workoutapp.view.DashboardActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -87,6 +89,10 @@ public class UserRepository {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(context, "Auth Status: SUCCESS!", Toast.LENGTH_SHORT).show();
+
+                            Intent i = new Intent(context, DashboardActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(i);
                         }
                     })
                     .addOnFailureListener(e -> {
@@ -131,7 +137,12 @@ public class UserRepository {
         return Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
     }
 
+    public boolean isUserLoggedIn(){
+        return firebaseAuth.getCurrentUser() != null;
+    }
+
     public void signOut() {
-        firebaseAuth.signOut();
+        Toast.makeText(context, "LOG OUT", Toast.LENGTH_SHORT).show();
+        FirebaseAuth.getInstance().signOut();
     }
 }
