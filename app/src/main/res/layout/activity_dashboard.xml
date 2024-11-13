@@ -16,7 +16,7 @@
         android:background="@color/mainColor"
         tools:context=".view.DashboardActivity">
         
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
@@ -67,10 +67,23 @@
                     
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:padding="3dp"
+                    android:background="@drawable/custom_edittext"
+                    android:text="YOUR STATISTICS"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    tools:ignore="HardcodedText" />
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
                     
                     <LinearLayout
@@ -86,20 +99,22 @@
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/step_icon" />
+                            android:src="@drawable/clock_minute_icon" />
                         
                         <TextView
+                            android:id="@+id/doneTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="7000"
+                            android:text="0"
                             android:textColor="@color/white"
                             android:textSize="24sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText"/>
                         
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="STEPS"
+                            android:text="MINUTES"
                             android:textColor="@color/editTextContent"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -120,20 +135,22 @@
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/calorie_icon" />
+                            android:src="@drawable/exercise_amount_icon" />
                         
                         <TextView
+                            android:id="@+id/doneExercises"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="800"
+                            android:text="0"
                             android:textColor="@color/white"
                             android:textSize="24sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText"/>
                         
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CALORIES"
+                            android:text="EXERCISES"
                             android:textColor="@color/editTextContent"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -144,7 +161,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="120dp"
-                        android:layout_marginEnd="10dp"
+                        
                         android:layout_weight="0.333"
                         android:background="@drawable/custom_edittext"
                         android:gravity="center"
@@ -154,28 +171,29 @@
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/track_icon" />
+                            android:src="@drawable/calories_fire_icon" />
                         
                         <TextView
+                            android:id="@+id/doneCalories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2"
+                            android:text="0"
                             android:textColor="@color/white"
                             android:textSize="24sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText"/>
                         
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="KM"
+                            android:text="KCAL"
                             android:textColor="@color/editTextContent"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             tools:ignore="HardcodedText" />
                     
                     </LinearLayout>
-                
-                
+                    
                 </LinearLayout>
                 
                 <TextView
@@ -198,7 +216,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="30dp"
                     android:text="Completed Workout"
                     android:textColor="@color/white"
                     android:textSize="18sp"
@@ -210,12 +228,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal" />
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal"
+                    android:nestedScrollingEnabled="false"/>
             
             </LinearLayout>
             
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
         
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navBar"

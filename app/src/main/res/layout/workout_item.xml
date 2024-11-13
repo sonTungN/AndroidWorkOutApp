@@ -12,7 +12,7 @@
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="230dp"
-        android:layout_height="230dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/workout_item_bg"
         android:layout_marginEnd="16dp">
         
@@ -34,66 +34,78 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@{exercise.title}"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/thumb" />
         
+        <TextView
+            android:id="@+id/subTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="5dp"
+            android:text='@{exercise.lessonCount + " Lessons"}'
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:orientation="horizontal"
             android:layout_margin="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/title">
+            android:paddingBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/subTitle">
             
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginEnd="2dp"
                 android:layout_weight="0.33"
-                android:gravity="center">
+                android:background="@drawable/custom_detailtext"
+                android:gravity="center"
+                android:orientation="horizontal">
                 
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    android:src="@drawable/clock_icon"/>
+                    android:src="@drawable/clock_color_icon" />
                 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{exercise.totalDuration}"
-                    android:layout_marginStart="2dp" />
-                
-            </LinearLayout>
-            
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="0.33"
-                android:gravity="center">
-                
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@drawable/dumbell"/>
+                    android:layout_marginStart="4dp"
+                    android:text='@{exercise.totalDuration}'
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
                 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text='@{exercise.lessonCount + " Exs"}'
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="5dp"/>
+                    android:text="min"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="1dp"
+                    android:textColor="@color/lightBlack"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
             
             </LinearLayout>
             
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:orientation="horizontal"
                 android:layout_weight="0.33"
+                android:background="@drawable/custom_detailtext"
                 android:gravity="center">
                 
                 <ImageView
@@ -104,14 +116,25 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{exercise.totalCalories}"
-                    android:layout_marginStart="1dp" />
-            
+                    android:text='@{exercise.totalCalories}'
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginStart="3dp" />
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kcal"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="1dp"
+                    android:textColor="@color/lightBlack"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+                
             </LinearLayout>
-            
         </LinearLayout>
-    
-    
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

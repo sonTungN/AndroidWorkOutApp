@@ -113,7 +113,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{exercise.totalDuration}"
+                            android:text='@{exercise.totalDuration + " min"}'
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -162,7 +162,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{exercise.totalCalories}"
+                            android:text='@{exercise.totalCalories + " Kcal"}'
                             android:textColor="@color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />

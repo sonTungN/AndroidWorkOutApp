@@ -1,10 +1,14 @@
 package com.example.workoutapp.model;
 
+import android.util.Log;
+
+import androidx.databinding.Bindable;
+
 import java.util.List;
+import java.util.Objects;
 
 public class User {
     private String email;
-
     private String displayName;
 
     private List<Exercise> doneExercises;
@@ -49,5 +53,9 @@ public class User {
 
     public void setDoneExercises(List<Exercise> doneExercises) {
         this.doneExercises = doneExercises;
+    }
+
+    public int getDoneTotalExercises() {
+        return doneExercises != null ? doneExercises.size() : 0;
     }
 }

@@ -4,10 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -22,13 +20,12 @@ import com.example.workoutapp.R;
 import com.example.workoutapp.adapter.ExerciseAdapter;
 import com.example.workoutapp.databinding.ActivityDashboardBinding;
 import com.example.workoutapp.model.Exercise;
-import com.example.workoutapp.model.User;
 import com.example.workoutapp.viewmodel.ExerciseViewModel;
 import com.example.workoutapp.viewmodel.UserViewModel;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -64,13 +61,6 @@ public class DashboardActivity extends AppCompatActivity {
         // User
         userViewModel.getUserMutableLiveData().observe(this, user -> binding.setUser(user));
 
-        if (!userViewModel.isUserLoggedIn()) {
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
-
         // All Exercise
         exerciseList = new ArrayList<>();
         exerciseRecyclerView = binding.exerciseRecyclerView;
@@ -81,6 +71,7 @@ public class DashboardActivity extends AppCompatActivity {
                         false
                 )
         );
+        exerciseRecyclerView.hasFixedSize();
 
         exerciseViewModel.getExerciseLiveData().observe(this, new Observer<List<Exercise>>() {
             @SuppressLint("NotifyDataSetChanged")
@@ -95,7 +86,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-//        // Done Exercise
+        // Done Exercise
         fetchDoneExercise();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -111,17 +102,16 @@ public class DashboardActivity extends AppCompatActivity {
         fetchDoneExercise();
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        userViewModel.getUserMutableLiveData().removeObserver();
-//        exerciseViewModel.getDoneExerciseLiveData().removeObserver();
-//    }
-
     public void fetchDoneExercise() {
         doneExerciseList = new ArrayList<>();
         doneExerciseRecyclerView = binding.doneRecyclerView;
-        doneExerciseRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        doneExerciseRecyclerView.setLayoutManager(
+                new LinearLayoutManager(
+                        this,
+                        LinearLayoutManager.HORIZONTAL,
+                        false)
+        );
+        doneExerciseRecyclerView.hasFixedSize();
 
         exerciseViewModel.getDoneExerciseLiveData(userViewModel.getCurrentUserId()).observe(this, new Observer<List<Exercise>>() {
             @SuppressLint("NotifyDataSetChanged")
@@ -133,8 +123,29 @@ public class DashboardActivity extends AppCompatActivity {
                 doneExerciseAdapter = new ExerciseAdapter(getApplicationContext(), doneExerciseList);
                 doneExerciseRecyclerView.setAdapter(doneExerciseAdapter);
                 doneExerciseAdapter.notifyDataSetChanged();
+
+                fetchDataIntoFieldValue(exercises);
             }
         });
+    }
+
+    public void fetchDataIntoFieldValue(List<Exercise> exercises) {
+        int doneTime = 0, doneExercise = 0, doneCalories = 0;
+
+        for(Exercise e : exercises) {
+            try {
+                doneTime += Integer.parseInt(e.getTotalDuration());
+                doneExercise++;
+                doneCalories += Integer.parseInt(e.getTotalCalories());
+
+            } catch (Exception ignored) {
+                Log.d("FIELD", Objects.requireNonNull(ignored.getMessage()));
+            }
+        }
+
+        binding.doneTime.setText(String.valueOf(doneTime));
+        binding.doneExercises.setText(String.valueOf(doneExercise));
+        binding.doneCalories.setText(String.valueOf(doneCalories));
     }
 
     public void setUpBottomNavigationBar() {

@@ -12,7 +12,6 @@ public class Exercise {
 
     private String description;
     private List<Lesson> lessonList;
-//    private Boolean isDone;
 
     public Exercise() {
     }
