@@ -83,5 +83,6 @@ public class ProfileActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), targetActivity);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

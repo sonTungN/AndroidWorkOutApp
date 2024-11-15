@@ -184,5 +184,12 @@ public class SearchActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), targetActivity);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+
+        if (targetActivity == DashboardActivity.class) {
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+        } else if (targetActivity == ProfileActivity.class) {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
     }
 }
