@@ -2,7 +2,6 @@ package com.example.workoutapp.model;
 
 import java.util.List;
 
-
 public class Exercise {
     private String documentId;
     private String title;

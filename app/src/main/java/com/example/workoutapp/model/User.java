@@ -1,11 +1,6 @@
 package com.example.workoutapp.model;
 
-import android.util.Log;
-
-import androidx.databinding.Bindable;
-
 import java.util.List;
-import java.util.Objects;
 
 public class User {
     private String email;

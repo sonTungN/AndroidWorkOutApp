@@ -31,17 +31,17 @@ import java.util.Objects;
 
 public class ExerciseRepository {
     public static final String EXERCISE_COLLECTION_PATH = "Exercises";
-    private Context context;
+    private final Context context;
 
     // Firebase FireStore
-    private FirebaseFirestore db;
-    private CollectionReference collectionReference;
+    private final FirebaseFirestore db;
+    private final CollectionReference collectionReference;
 
     // Live Data List
-    private MutableLiveData<List<Exercise>> exerciseMutableLiveData;
-    private MutableLiveData<List<Exercise>> doneExerciseMutableLiveData;
+    private final MutableLiveData<List<Exercise>> exerciseMutableLiveData;
+    private final MutableLiveData<List<Exercise>> doneExerciseMutableLiveData;
 
-    private MutableLiveData<List<Lesson>> lessonListMutableLiveData;
+    private final MutableLiveData<List<Lesson>> lessonListMutableLiveData;
 
     public ExerciseRepository(Context context) {
         this.context = context;

@@ -13,7 +13,7 @@ import com.example.workoutapp.repository.ExerciseRepository;
 import java.util.List;
 
 public class ExerciseViewModel extends AndroidViewModel {
-    private ExerciseRepository repository;
+    private final ExerciseRepository repository;
 
     public ExerciseViewModel(@NonNull Application application) {
         super(application);

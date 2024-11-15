@@ -22,14 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHolder> {
-    private Context context;
-    private List<Exercise> exerciseList;
-    private List<Exercise> allStoredExercise;
+    private final Context context;
+    private final List<Exercise> exerciseList;
 
     public ExerciseAdapter(Context context, List<Exercise> exerciseList) {
         this.context = context;
         this.exerciseList = exerciseList;
-        this.allStoredExercise = new ArrayList<>(exerciseList);
     }
 
     @NonNull
@@ -71,8 +69,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHo
 
             binding.getRoot().setOnClickListener(view -> {
                 int position = getAdapterPosition();
-
-                Toast.makeText(context, "Clicked: " + position, Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(context, LessonActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

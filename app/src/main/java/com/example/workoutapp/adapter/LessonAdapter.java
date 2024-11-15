@@ -21,8 +21,8 @@ import java.util.List;
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder>{
 
-    private Context context;
-    private List<Lesson> lessonList;
+    private final Context context;
+    private final List<Lesson> lessonList;
 
     public LessonAdapter(Context context, List<Lesson> lessonList) {
         this.context = context;
@@ -53,11 +53,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                 .into(holder.binding.lessonThumb);
 
         holder.binding.playButton.setOnClickListener(view -> {
-//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=bzSTpdcs-EI"));
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            intent.setPackage("com.google.android.youtube");
-//            startActivity(intent)
-
             Intent appIntent = new Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse(
@@ -73,7 +68,6 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                                     lessonList.get(position).getLink()
                     )
             );
-
 
             try {
                 appIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -93,17 +87,12 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
         return lessonList != null ? lessonList.size() : 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private LessonItemBinding binding;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final LessonItemBinding binding;
 
         public ViewHolder(LessonItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-
-            binding.getRoot().setOnClickListener(view -> {
-                int position = getAdapterPosition();
-                Toast.makeText(context, "Lesson: " + position, Toast.LENGTH_SHORT).show();
-            });
         }
 
         public LessonItemBinding getBinding() {

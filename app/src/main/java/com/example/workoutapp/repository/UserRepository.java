@@ -21,17 +21,17 @@ import java.util.Objects;
 
 public class UserRepository {
     public static final String USER_COLLECTION_PATH = "Users";
-    private Context context;
+    private final Context context;
 
     // Firebase Auth
-    private FirebaseAuth firebaseAuth;
+    private final FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
 
     // Firebase FireStore
-    private FirebaseFirestore db;
+    private final FirebaseFirestore db;
 
     // Live Data List
-    private MutableLiveData<User> userMutableLiveData;
+    private final MutableLiveData<User> userMutableLiveData;
 
     public UserRepository(Context context) {
         this.context = context;
@@ -65,7 +65,7 @@ public class UserRepository {
                                 });
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(context, "Register Status: SUCCESS!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Register Status: SUCCESS", Toast.LENGTH_SHORT).show();
 
                             User userObject = new User(email, displayName, new ArrayList<>());
                             db.collection(USER_COLLECTION_PATH)
@@ -75,7 +75,7 @@ public class UserRepository {
                     })
                     .addOnFailureListener(e -> {
                         Log.d("REGISTER", Objects.requireNonNull(e.getMessage()));
-                        Toast.makeText(context, "Register Status: FAILED!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Register Status: FAILED", Toast.LENGTH_SHORT).show();
                     });
         }
     }
@@ -88,7 +88,7 @@ public class UserRepository {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(context, "Auth Status: SUCCESS!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Auth Status: SUCCESS", Toast.LENGTH_SHORT).show();
 
                             Intent i = new Intent(context, DashboardActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -96,7 +96,7 @@ public class UserRepository {
                         }
                     })
                     .addOnFailureListener(e -> {
-                        Toast.makeText(context, "Auth Status: FAILED!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Auth Status: FAILED", Toast.LENGTH_SHORT).show();
                         Log.d("LOGIN FAILED", Objects.requireNonNull(e.getMessage()));
                     });
         }
@@ -113,9 +113,9 @@ public class UserRepository {
         currentUser.updateProfile(changeRequest)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(context, "Update Status: SAVE!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Update Status: SAVE", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(context, "Update Status: FAILED!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Update Status: FAILED", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

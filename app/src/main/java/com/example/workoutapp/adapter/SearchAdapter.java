@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
-    private Context context;
-    private List<Exercise> exerciseList;
-    private List<Exercise> allStoredExercise;
+    private final Context context;
+    private final List<Exercise> exerciseList;
+    private final List<Exercise> allStoredExercise;
 
     public SearchAdapter(Context context, List<Exercise> exerciseList) {
         this.context = context;
@@ -59,7 +59,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return exerciseList != null ? exerciseList.size() : 0;
+        return exerciseList.size();
     }
 
     // Override the filtering method
@@ -108,8 +108,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
             binding.getRoot().setOnClickListener(view -> {
                 int position = getAdapterPosition();
-
-                Toast.makeText(context, "Clicked: " + position, Toast.LENGTH_SHORT).show();
 
                 Intent i = new Intent(context, LessonActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
