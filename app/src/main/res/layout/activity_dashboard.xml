@@ -37,7 +37,7 @@
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Welcome back,"
+                        android:text="Welcome,"
                         android:textSize="16sp"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/account_icon"
+                        android:src="@drawable/profile"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -161,7 +161,6 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="120dp"
-                        
                         android:layout_weight="0.333"
                         android:background="@drawable/custom_edittext"
                         android:gravity="center"
@@ -171,7 +170,7 @@
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_marginBottom="8dp"
-                            android:src="@drawable/calories_fire_icon" />
+                            android:src="@drawable/calories_kcal_icon" />
                         
                         <TextView
                             android:id="@+id/doneCalories"
@@ -206,12 +205,43 @@
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
                 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/exerciseRecyclerView"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal" />
+                    android:minHeight="200dp">
+                    
+                    <ProgressBar
+                        android:id="@+id/exerciseProgressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/exerciseRecyclerView"
+                        app:layout_constraintEnd_toEndOf="@+id/exerciseRecyclerView" />
+                    
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/exerciseRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:nestedScrollingEnabled="false"/>
+                    
+                    <TextView
+                        android:id="@+id/preTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Coming soon..."
+                        android:textColor="@color/filterColor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+                    
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 
                 <TextView
                     android:layout_width="match_parent"
@@ -223,14 +253,45 @@
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
                 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/doneRecyclerView"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal"
-                    android:nestedScrollingEnabled="false"/>
+                    android:minHeight="200dp"
+                    android:layout_marginBottom="20dp">
+                    
+                    <ProgressBar
+                        android:id="@+id/doneProgressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/doneRecyclerView"
+                        app:layout_constraintEnd_toEndOf="@+id/doneRecyclerView" />
+                    
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/doneRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal"
+                        android:nestedScrollingEnabled="false"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                    
+                    <TextView
+                        android:id="@+id/donePreTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="No completed workouts yet!"
+                        android:textColor="@color/filterColor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+                
+                </androidx.constraintlayout.widget.ConstraintLayout>
             
             </LinearLayout>
             

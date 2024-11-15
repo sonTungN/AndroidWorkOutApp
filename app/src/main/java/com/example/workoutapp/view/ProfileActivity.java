@@ -69,9 +69,10 @@ public class ProfileActivity extends AppCompatActivity {
                     navigateToActivity(DashboardActivity.class);
                     return true;
 
-                } else if (item.getItemId() == R.id.profile) {
-                    navigateToActivity(ProfileActivity.class);
+                } else if (item.getItemId() == R.id.search) {
+                    navigateToActivity(SearchActivity.class);
                     return true;
+
                 }
 
                 return false;

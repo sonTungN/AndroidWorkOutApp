@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+<?xml version="1.0" encoding="utf-8"?>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="mainColor">#232323</color>
     <color name="lightBlack">#3A3A3A</color>
+    <color name="editTextContent">#6F6F6F</color>
+    <color name="editTextTextColor">#A9A5A5</color>
+    <color name="filterColor">#C6C0C0</color>
+    <color name="lightGrey">#EFEAE7</color>
+    <color name="white">#FFFFFFFF</color>
     <color name="orange">#FD511E</color>
     <color name="red">#F05941</color>
     <color name="green">#4ADE80</color>
-    <color name="editTextContent">#6F6F6F</color>
-    <color name="lightGrey">#EFEAE7</color>
 </resources>

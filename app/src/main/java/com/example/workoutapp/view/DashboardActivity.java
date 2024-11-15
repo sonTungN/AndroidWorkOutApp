@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,30 +62,14 @@ public class DashboardActivity extends AppCompatActivity {
         // User
         userViewModel.getUserMutableLiveData().observe(this, user -> binding.setUser(user));
 
+        binding.exerciseProgressBar.setVisibility(View.VISIBLE);
+        binding.preTextView.setVisibility(View.GONE);
+
+        binding.doneProgressBar.setVisibility(View.VISIBLE);
+        binding.donePreTextView.setVisibility(View.GONE);
+
         // All Exercise
-        exerciseList = new ArrayList<>();
-        exerciseRecyclerView = binding.exerciseRecyclerView;
-        exerciseRecyclerView.setLayoutManager(
-                new LinearLayoutManager(
-                        this,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
-                )
-        );
-        exerciseRecyclerView.hasFixedSize();
-
-        exerciseViewModel.getExerciseLiveData().observe(this, new Observer<List<Exercise>>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onChanged(List<Exercise> exercises) {
-                exerciseList.clear();
-                exerciseList.addAll(exercises);
-
-                exerciseAdapter = new ExerciseAdapter(getApplicationContext(), exerciseList);
-                exerciseRecyclerView.setAdapter(exerciseAdapter);
-                exerciseAdapter.notifyDataSetChanged();
-            }
-        });
+        fetchAllExercise();
 
         // Done Exercise
         fetchDoneExercise();
@@ -102,6 +87,42 @@ public class DashboardActivity extends AppCompatActivity {
         fetchDoneExercise();
     }
 
+    public void fetchAllExercise() {
+        exerciseList = new ArrayList<>();
+        exerciseRecyclerView = binding.exerciseRecyclerView;
+        exerciseRecyclerView.setLayoutManager(
+                new LinearLayoutManager(
+                        this,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                )
+        );
+        exerciseRecyclerView.hasFixedSize();
+
+        exerciseViewModel.getExerciseLiveData().observe(this, new Observer<List<Exercise>>() {
+            @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
+            @Override
+            public void onChanged(List<Exercise> exercises) {
+                exerciseList.clear();
+                binding.exerciseProgressBar.setVisibility(View.GONE);
+
+                if(exercises.isEmpty()) {
+                    binding.preTextView.setVisibility(View.VISIBLE);
+                } else {
+                    binding.preTextView.setVisibility(View.GONE);
+                }
+
+                exerciseList.addAll(exercises);
+
+                exerciseAdapter = new ExerciseAdapter(getApplicationContext(), exerciseList);
+                exerciseRecyclerView.setAdapter(exerciseAdapter);
+                exerciseAdapter.notifyDataSetChanged();
+
+                binding.exerciseProgressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
     public void fetchDoneExercise() {
         doneExerciseList = new ArrayList<>();
         doneExerciseRecyclerView = binding.doneRecyclerView;
@@ -114,10 +135,18 @@ public class DashboardActivity extends AppCompatActivity {
         doneExerciseRecyclerView.hasFixedSize();
 
         exerciseViewModel.getDoneExerciseLiveData(userViewModel.getCurrentUserId()).observe(this, new Observer<List<Exercise>>() {
-            @SuppressLint("NotifyDataSetChanged")
+            @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
             @Override
             public void onChanged(List<Exercise> exercises) {
                 doneExerciseList.clear();
+                binding.doneProgressBar.setVisibility(View.GONE);
+
+                if(exercises.isEmpty()) {
+                    binding.donePreTextView.setVisibility(View.VISIBLE);
+                } else {
+                    binding.donePreTextView.setVisibility(View.GONE);
+                }
+
                 doneExerciseList.addAll(exercises);
 
                 doneExerciseAdapter = new ExerciseAdapter(getApplicationContext(), doneExerciseList);
@@ -151,13 +180,14 @@ public class DashboardActivity extends AppCompatActivity {
     public void setUpBottomNavigationBar() {
         binding.navBar.setSelectedItemId(R.id.home);
         binding.navBar.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.home) {
-                navigateToActivity(DashboardActivity.class);
+            if (item.getItemId() == R.id.search) {
+                navigateToActivity(SearchActivity.class);
                 return true;
 
             } else if (item.getItemId() == R.id.profile) {
                navigateToActivity(ProfileActivity.class);
                return true;
+
             }
 
             return false;

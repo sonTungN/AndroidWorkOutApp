@@ -43,6 +43,7 @@
             android:padding="8dp"
             android:text="@{user.email}"
             android:textColorHint="@color/editTextContent"
+            android:textColor="@color/editTextTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +63,7 @@
             android:padding="8dp"
             android:text="@{user.displayName}"
             android:textColorHint="@color/editTextContent"
+            android:textColor="@color/editTextTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_email" />
