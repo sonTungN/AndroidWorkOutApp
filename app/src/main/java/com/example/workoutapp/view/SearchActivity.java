@@ -74,10 +74,9 @@ public class SearchActivity extends AppCompatActivity {
         searchRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         updateFilterButtonStyles();
+
         clientAllExercise = new ArrayList<>();
-        exerciseViewModel
-                .getExerciseLiveData()
-                .observe(this, this::setUpExerciseSearch);
+        exerciseViewModel.getExerciseLiveData().observe(this, this::setUpExerciseSearch);
 
         allFilterButton.setOnClickListener(view -> onFilterButtonClicked(true));
         completedFilterButton.setOnClickListener(view -> onFilterButtonClicked(false));
@@ -111,7 +110,26 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    private void setUpExerciseSearch(List<Exercise> exercises) {
+        clientAllExercise.clear();
+        clientAllExercise.addAll(exercises);
 
+        searchExerciseAdapter = new SearchAdapter(getApplicationContext(), clientAllExercise);
+        searchRecyclerView.setAdapter(searchExerciseAdapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String input) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String input) {
+                searchExerciseAdapter.getFilter().filter(input);
+                return false;
+            }
+        });
+    }
 
     private void setUpCompletedExerciseSearch(List<Exercise> exercises) {
         clientCompletedExercise.clear();
@@ -129,27 +147,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String input) {
                 searchDoneExerciseAdapter.getFilter().filter(input);
-                return false;
-            }
-        });
-    }
-
-    private void setUpExerciseSearch(List<Exercise> exercises) {
-        clientAllExercise.clear();
-        clientAllExercise.addAll(exercises);
-
-        searchExerciseAdapter = new SearchAdapter(getApplicationContext(), clientAllExercise);
-        searchRecyclerView.setAdapter(searchExerciseAdapter);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String input) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String input) {
-                searchExerciseAdapter.getFilter().filter(input);
                 return false;
             }
         });

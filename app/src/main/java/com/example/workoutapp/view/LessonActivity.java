@@ -60,9 +60,6 @@ public class LessonActivity extends AppCompatActivity {
     private LessonAdapter lessonAdapter;
     private List<Lesson> lessonList;
 
-    // Widget
-    private ImageView backButton;
-
     // Dialog
     private Dialog confirmDialog;
 
@@ -107,8 +104,7 @@ public class LessonActivity extends AppCompatActivity {
         });
 
         // Back Button
-        backButton = binding.backButton;
-        backButton.setOnClickListener(view -> {
+        binding.backButton.setOnClickListener(view -> {
             finish();
         });
 

@@ -49,8 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.logout.setOnClickListener(view -> {
             userViewModel.signOut();
-
-            navigateToActivity(SignInActivity.class);
+            navigateToActivity(WelcomeActivity.class);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
