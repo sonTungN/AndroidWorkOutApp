@@ -55,6 +55,7 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
             android:text='@{exercise.lessonCount + " Lessons"}'
             android:textColor="@color/white"
             android:textSize="13sp"

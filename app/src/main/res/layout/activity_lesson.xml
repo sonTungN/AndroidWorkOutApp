@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     xmlns:tools="http://schemas.android.com/tools">
     
     <data>
@@ -20,14 +21,15 @@
         android:background="@color/mainColor"
         tools:context=".view.LessonActivity">
         
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
                 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -68,30 +70,30 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="125dp"
+                        android:background="@drawable/fade_vertical_gradient_bg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        android:background="@drawable/fade_vertical_gradient_bg" />
-                    
+                        app:layout_constraintRight_toRightOf="parent" />
+                
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@{exercise.title}"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
                     android:textSize="20sp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp" />
+                    android:textStyle="bold" />
                 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
                     android:orientation="horizontal">
                     
                     <LinearLayout
@@ -167,19 +169,19 @@
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
-                    
+                
                 </LinearLayout>
                 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="@{exercise.description}"
-                    android:textSize="13sp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
                 
                 <TextView
                     android:layout_width="match_parent"
@@ -191,17 +193,15 @@
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    tools:ignore="HardcodedText"/>
+                    tools:ignore="HardcodedText" />
                 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="100dp"/>
-                
+                    android:paddingBottom="100dp" />
             </LinearLayout>
-            
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
         
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/doneBtn"

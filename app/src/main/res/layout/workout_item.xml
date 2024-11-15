@@ -14,7 +14,7 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:background="@drawable/workout_item_bg"
-        android:layout_marginEnd="16dp">
+        android:layout_marginEnd="10dp">
         
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/thumb"

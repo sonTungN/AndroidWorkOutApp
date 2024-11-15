@@ -62,15 +62,8 @@ public class DashboardActivity extends AppCompatActivity {
         // User
         userViewModel.getUserMutableLiveData().observe(this, user -> binding.setUser(user));
 
-        binding.exerciseProgressBar.setVisibility(View.VISIBLE);
-        binding.preTextView.setVisibility(View.GONE);
-
-        binding.doneProgressBar.setVisibility(View.VISIBLE);
-        binding.donePreTextView.setVisibility(View.GONE);
-
-        binding.profileAvatar.setOnClickListener(view -> {
-            navigateToActivity(ProfileActivity.class);
-        });
+        // Set up user interface
+        setUpUserInterface();
 
         // All Exercise
         fetchAllExercise();
@@ -89,6 +82,18 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         fetchDoneExercise();
+    }
+
+    public void setUpUserInterface() {
+        binding.exerciseProgressBar.setVisibility(View.VISIBLE);
+        binding.preTextView.setVisibility(View.GONE);
+
+        binding.doneProgressBar.setVisibility(View.VISIBLE);
+        binding.donePreTextView.setVisibility(View.GONE);
+
+        binding.profileAvatar.setOnClickListener(view -> navigateToActivity(ProfileActivity.class));
+
+        binding.viewAllPopular.setOnClickListener(view -> navigateToActivity(SearchActivity.class));
     }
 
     public void fetchAllExercise() {

@@ -160,11 +160,16 @@ public class LessonActivity extends AppCompatActivity {
                 });
     }
 
+    @SuppressLint("ResourceAsColor")
     private void showConfirmDialog() {
         String docId = getIntent().getStringExtra("DOC_ID");
 
         confirmDialog = new Dialog(this);
         confirmDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        Window window = confirmDialog.getWindow();
+        assert window != null;
+        confirmDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         View view = LayoutInflater.from(getApplicationContext())
                 .inflate(R.layout.confirm_dialog, null);

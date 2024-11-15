@@ -1,8 +1,10 @@
 package com.example.workoutapp.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 
@@ -94,6 +96,9 @@ public class SearchActivity extends AppCompatActivity {
             updateFilterButtonStyles();
 
             if(isAllFilterButtonSelected) {
+                binding.searchProgressBar.setVisibility(View.VISIBLE);
+                binding.searchPreTextView.setVisibility(View.GONE);
+
                 // Getting Exercise Lists
                 clientAllExercise = new ArrayList<>();
                 exerciseViewModel
@@ -110,8 +115,19 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setUpExerciseSearch(List<Exercise> exercises) {
         clientAllExercise.clear();
+        binding.searchProgressBar.setVisibility(View.GONE);
+
+        if (exercises.isEmpty()) {
+            binding.searchPreTextView.setVisibility(View.VISIBLE);
+            binding.searchPreTextView.setText("Coming soon...");
+
+        } else {
+            binding.searchPreTextView.setVisibility(View.GONE);
+        }
+
         clientAllExercise.addAll(exercises);
 
         searchExerciseAdapter = new SearchAdapter(getApplicationContext(), clientAllExercise);
@@ -131,8 +147,19 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void setUpCompletedExerciseSearch(List<Exercise> exercises) {
         clientCompletedExercise.clear();
+        binding.searchProgressBar.setVisibility(View.GONE);
+
+        if (exercises.isEmpty()) {
+            binding.searchPreTextView.setVisibility(View.VISIBLE);
+            binding.searchPreTextView.setText("No completed workouts found!");
+
+        } else {
+            binding.searchPreTextView.setVisibility(View.GONE);
+        }
+
         clientCompletedExercise.addAll(exercises);
 
         searchDoneExerciseAdapter = new SearchAdapter(getApplicationContext(), clientCompletedExercise);
